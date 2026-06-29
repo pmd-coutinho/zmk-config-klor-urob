@@ -41,6 +41,10 @@
   quick-tap-ms = <QUICK_TAP_MS>;
 };
 
+&uc { // Unicode input (leader.dtsi). IBus' Ctrl+Shift+U method on Linux.
+  default-mode = <UC_MODE_LINUX>; // Swap to UC_MODE_LINUX_ALT if some apps choke.
+};
+
 /* Homerow mods */
 
 #define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS)                                 \
