@@ -1,0 +1,14 @@
+# Alternative to the Makefile for people who prefer compose.
+#   docker compose run --rm zmk bash -lc "west init -l config && west update && west zephyr-export"
+#   docker compose run --rm zmk west build -p -s zmk/app -b nice_nano_v2 -- \
+#       -DSHIELD=klor_left -DZMK_CONFIG=/workspace/config
+services:
+  zmk:
+    image: zmkfirmware/zmk-dev-arm:stable
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    # Keep stdin open so interactive shells work via `docker compose run`.
+    stdin_open: true
+    tty: true
+    command: bash

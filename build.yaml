@@ -1,0 +1,9 @@
+# Build targets. Used as documentation here (local builds go through the
+# Makefile); also consumable by GitHub Actions if you add a workflow later.
+# "nice_nano//zmk" = nice!nano v2 (board nice_nano, default rev 2.0.0, zmk variant).
+---
+include:
+  - board: nice_nano//zmk
+    shield: klor_left
+  - board: nice_nano//zmk
+    shield: klor_right

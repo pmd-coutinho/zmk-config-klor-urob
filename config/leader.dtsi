@@ -1,0 +1,61 @@
+/*
+ * Leader-key sequences. Trigger the leader with the LM2+LM1 combo (see
+ * combos.dtsi), then type a sequence below.
+ *
+ * Portuguese accents + currency symbols, via the zmk-unicode module. Holding
+ * Shift while entering a letter sequence yields the uppercase glyph (the leader
+ * ignores Shift for matching, but &uc still reads it for case).
+ *
+ * Scheme:
+ *   acute      → leader + <vowel>     a e i o u  →  á é í ó ú
+ *   tilde      → leader N <vowel>     N a / N o  →  ã õ        (N = nasal)
+ *   circumflex → leader H <vowel>     H a/H e/H o →  â ê ô     (H = hat)
+ *   grave      → leader G a           →  à
+ *   cedilha    → leader C             →  ç
+ *   currency   → leader M <key>       M e/l/d/c/y → € £ $ ¢ ¥  (M = money)
+ *
+ * Note: portuguese.h is missing í/ú/õ, so those use raw code points.
+ */
+
+#undef ZMK_LEADER_SEQUENCE
+#define ZMK_LEADER_SEQUENCE(name, leader_bindings, leader_sequence) \
+    / { \
+        behaviors { \
+            leader: leader { \
+                compatible = "zmk,behavior-leader-key"; \
+                #binding-cells = <0>; \
+                ignore-keys = <LSHFT RSHFT>; \
+                leader_sequence_ ## name { \
+                    bindings = <leader_bindings>; \
+                    sequence = <leader_sequence>; \
+                }; \
+            }; \
+        }; \
+    };
+
+/* Acute (single vowel) */
+ZMK_LEADER_SEQUENCE(pt_a_acute, &uc UC_PT_AA,          A)    // á / Á
+ZMK_LEADER_SEQUENCE(pt_e_acute, &uc UC_PT_E_ACUTE,     E)    // é / É
+ZMK_LEADER_SEQUENCE(pt_i_acute, &uc 0xED 0xCD,         I)    // í / Í
+ZMK_LEADER_SEQUENCE(pt_o_acute, &uc UC_PT_OA,          O)    // ó / Ó
+ZMK_LEADER_SEQUENCE(pt_u_acute, &uc 0xFA 0xDA,         U)    // ú / Ú
+
+/* Tilde (N = nasal) */
+ZMK_LEADER_SEQUENCE(pt_a_tilde, &uc UC_PT_A_TILDE,     N A)  // ã / Ã
+ZMK_LEADER_SEQUENCE(pt_o_tilde, &uc 0xF5 0xD5,         N O)  // õ / Õ
+
+/* Circumflex (H = hat) */
+ZMK_LEADER_SEQUENCE(pt_a_circ,  &uc UC_PT_A_CIRCUMFLEX, H A) // â / Â
+ZMK_LEADER_SEQUENCE(pt_e_circ,  &uc UC_PT_E_CIRCUMFLEX, H E) // ê / Ê
+ZMK_LEADER_SEQUENCE(pt_o_circ,  &uc UC_PT_O_CIRCUMFLEX, H O) // ô / Ô
+
+/* Grave + cedilha */
+ZMK_LEADER_SEQUENCE(pt_a_grave, &uc UC_PT_A_GRAVE,     G A)  // à / À
+ZMK_LEADER_SEQUENCE(pt_cedilha, &uc UC_PT_C_CEDILLA,   C)    // ç / Ç
+
+/* Currency (M = money) */
+ZMK_LEADER_SEQUENCE(cur_euro,   &uc UC_CURR_EURO,      M E)  // €
+ZMK_LEADER_SEQUENCE(cur_pound,  &uc UC_CURR_POUND,     M L)  // £
+ZMK_LEADER_SEQUENCE(cur_dollar, &uc UC_CURR_DOLLAR,    M D)  // $
+ZMK_LEADER_SEQUENCE(cur_cent,   &uc UC_CURR_CENT,      M C)  // ¢
+ZMK_LEADER_SEQUENCE(cur_yen,    &uc UC_CURR_YEN,       M Y)  // ¥

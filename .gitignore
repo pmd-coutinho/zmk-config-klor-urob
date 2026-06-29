@@ -1,0 +1,16 @@
+# west workspace + fetched sources (cloned by `make init`)
+/.west/
+/zmk/
+/zephyr/
+/modules/
+
+# build artifacts
+/build/
+/firmware/*.uf2
+
+# keymap-drawer intermediate (keep config.yaml + the rendered .svg)
+/draw/klor.yaml
+
+# editor / OS cruft
+.DS_Store
+*.swp
