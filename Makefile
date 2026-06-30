@@ -87,8 +87,10 @@ shell:
 
 # Flash helpers: put the half into bootloader (double-tap reset) so it mounts as
 # a USB drive, then run these. Adjust the mount path for your system.
-MOUNT ?= /run/media/$(USER)/NICENANO
+# NOTE: distinct from MOUNT above (the container bind-mount flags) — reusing that
+# name made the flash targets expand the podman args instead of this path.
+NICENANO ?= /run/media/$(USER)/NICENANO
 flash-left:
-	cp firmware/klor_left.uf2  "$(MOUNT)/"
+	cp firmware/klor_left.uf2  "$(NICENANO)/"
 flash-right:
-	cp firmware/klor_right.uf2 "$(MOUNT)/"
+	cp firmware/klor_right.uf2 "$(NICENANO)/"
