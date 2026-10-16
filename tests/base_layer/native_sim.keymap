@@ -1,0 +1,16 @@
+/* Tap every base-layer key in isolation (skips NUM/SHIFT/SYS thumbs, tested separately). */
+#include "../../config/klor.keymap"
+#include "../mock.h"
+
+&kscan {
+    rows = <1>;
+    columns = <44>;
+    events = <
+        TAP(0) TAP(1) TAP(2) TAP(3) TAP(4) TAP(5) TAP(6) TAP(7) TAP(8) TAP(9)
+        TAP(10) TAP(11) TAP(12) TAP(13) TAP(14) TAP(15)
+        TAP(16) TAP(17) TAP(18) TAP(19) TAP(20) TAP(21)
+        TAP(22) TAP(23) TAP(24) TAP(25) TAP(26) TAP(27) TAP(28)
+        TAP(29) TAP(30) TAP(31) TAP(32) TAP(33) TAP(34) TAP(35)
+        TAP(36) TAP(37) TAP(38) TAP(39) TAP(43)
+    >;
+};

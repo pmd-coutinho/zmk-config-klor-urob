@@ -15,11 +15,12 @@
 # $ west update
 # $ west zephyr-export
 #
+# Pins track urob/zmk-config's west.yml (as of 2026-09-05), minus
+# zmk-adaptive-key (unused here: no repeat key).
 ---
 manifest:
   defaults:
     remote: urob
-    # revision: v0.3 # Pin ZMK version
 
   remotes:
     - name: urob
@@ -30,31 +31,32 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: 0331b7d16e80954b807917f9323e59ffc1e3b626 # main (4/19/2026)
+      revision: 641514a97db345f499dd50b0360e594270f008fe # main (2026-08-31)
       import: app/west.yml
 
     # ZMK modules
     - name: zmk-auto-layer
       path: modules/zmk/auto-layer
-      revision: dfa7c695ffde41ef8064245453595d50e198ae1d # main (4/19/2026)
+      revision: 62c201934711369d50a28df12e1d055d05cb6460 # main (2026-08-18)
     - name: zmk-helpers
       path: modules/zmk/helpers
-      revision: 0b9e9d1dd9e86f70b4c8c2b0fab55c4f90c9d2e3 # main (4/19/2026)
+      revision: 95edb8f15ef1d1bd8332810555f8cf5837fbdd27 # main (2026-08-31)
     - name: zmk-leader-key
       path: modules/zmk/leader-key
-      revision: 749f7faf65cc4105c82fbe64cfaa7e09a8a63605 # main (4/19/2026)
+      revision: e894d9afa5164b7fff641db4194fc3d4d6e84bbb # main (2026-08-18)
     - name: zmk-tri-state
       path: modules/zmk/tri-state
-      revision: 2007896c6d5bfb519e8babccf8633841c5647d8b # main (4/19/2026)
+      revision: 0c6eaf55d2da0d85b943e02d72831c2d8ea64501 # main (2026-08-31)
     - name: zmk-unicode
       path: modules/zmk/unicode
-      revision: 1a6dbc797a46c4a61c3c71a7a9d013a5d5aee49e # main (4/19/2026)
+      revision: 5f458b6f1fd8ca83f4aba793c2a64916522507e9 # main (2026-08-31)
 
     # Only source necessary Zephyr modules. Remove this entire section to restore
     # the default (needed for less common hardware).
     - name: zephyr
       remote: zmkfirmware
-      revision: 58a5874a446ace2893a196848282d271a551e512 # v4.1.0+zmk-fixes
+      revision: 10ba6d0cb38bc3d258775d27982f707599320085 # v4.1.0+zmk-fixes (2026-08-18)
+      # ^ includes BLE controller fixes for intermittent split freezes
       import:
         name-allowlist:
           - cmsis
@@ -62,6 +64,7 @@ manifest:
           - hal_rpi_pico
           - hal_stm32
           - mbedtls
+          - nanopb  # ZMK Studio (protobuf RPC)
           - tinycrypt
 
   self:

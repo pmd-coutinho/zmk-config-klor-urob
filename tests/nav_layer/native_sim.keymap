@@ -1,0 +1,12 @@
+/* Hold space for NAV: arrows, bspc, sticky mods; tap space = space. */
+#include "../../config/klor.keymap"
+#include "../mock.h"
+
+&kscan {
+    rows = <1>;
+    columns = <44>;
+    events = <
+        DOWN(LH1, 250) TAP(RM0) TAP(RM1) TAP(RM2) TAP(RM3) TAP(RT0) UP(LH1, 300)
+        TAP(LH1)
+    >;
+};

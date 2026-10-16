@@ -1,0 +1,12 @@
+/* Leader (S+D combo) then A -> á via IBus Ctrl+Shift+U e1 space. */
+#include "../../config/klor.keymap"
+#include "../mock.h"
+
+&kscan {
+    rows = <1>;
+    columns = <44>;
+    events = <
+        DOWN(LM2, 5) DOWN(LM1, 40) UP(LM2, 5) UP(LM1, 300)
+        TAP(LM4)
+    >;
+};

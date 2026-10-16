@@ -1,0 +1,16 @@
+/* Combos: esc, parens, brackets, vertical symbols. */
+#include "../../config/klor.keymap"
+#include "../mock.h"
+
+&kscan {
+    rows = <1>;
+    columns = <44>;
+    events = <
+        DOWN(LT3, 5) DOWN(LT2, 40) UP(LT3, 5) UP(LT2, 300)
+        DOWN(RM1, 5) DOWN(RM2, 40) UP(RM1, 5) UP(RM2, 300)
+        DOWN(RM2, 5) DOWN(RM3, 40) UP(RM2, 5) UP(RM3, 300)
+        DOWN(RB1, 5) DOWN(RB2, 40) UP(RB1, 5) UP(RB2, 300)
+        DOWN(RT1, 5) DOWN(RM1, 40) UP(RT1, 5) UP(RM1, 300)
+        DOWN(LM1, 5) DOWN(LB1, 40) UP(LM1, 5) UP(LB1, 300)
+    >;
+};

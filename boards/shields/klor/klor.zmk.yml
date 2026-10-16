@@ -9,6 +9,7 @@ features:
   - keys
   - display
   - encoder
+  - studio
 siblings:
   - klor_left
   - klor_right

@@ -1,0 +1,12 @@
+/* Gui/Tab thumb: a quick Gui+L chord must send Gui+L (with &mt it sent Tab, L). */
+#include "../../config/klor.keymap"
+#include "../mock.h"
+
+&kscan {
+    rows = <1>;
+    columns = <44>;
+    events = <
+        DOWN(LH2, 50) DOWN(RM3, 30) UP(RM3, 30) UP(LH2, 300)
+        TAP(LH2)
+    >;
+};

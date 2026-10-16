@@ -3,7 +3,10 @@
 # "nice_nano//zmk" = nice!nano v2 (board nice_nano, default rev 2.0.0, zmk variant).
 ---
 include:
+  # ZMK Studio: central (left) half only.
   - board: nice_nano//zmk
     shield: klor_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: nice_nano//zmk
     shield: klor_right

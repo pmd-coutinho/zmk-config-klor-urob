@@ -1,13 +1,16 @@
-# Alternative to the Makefile for people who prefer compose.
+# Alternative to the Makefile for people who prefer compose. Same layout: the
+# west workspace lives in .zmk/, the repo itself is the KLOR shield module.
+#   mkdir -p .zmk/config
 #   docker compose run --rm zmk bash -lc "west init -l config && west update && west zephyr-export"
-#   docker compose run --rm zmk west build -p -s zmk/app -b nice_nano_v2 -- \
-#       -DSHIELD=klor_left -DZMK_CONFIG=/workspace/config
+#   docker compose run --rm zmk bash -lc "west zephyr-export && west build -p -s zmk/app -b nice_nano//zmk -d build/left -- \
+#       -DSHIELD=klor_left -DZMK_CONFIG=/workspace/config -DZMK_EXTRA_MODULES=/workspace"
 services:
   zmk:
     image: zmkfirmware/zmk-dev-arm:stable
     volumes:
       - .:/workspace
-    working_dir: /workspace
+      - ./config:/workspace/.zmk/config
+    working_dir: /workspace/.zmk
     # Keep stdin open so interactive shells work via `docker compose run`.
     stdin_open: true
     tty: true

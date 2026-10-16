@@ -1,0 +1,12 @@
+/* Shift thumb: tap = sticky shift for one key; shift+tap = caps-word. */
+#include "../../config/klor.keymap"
+#include "../mock.h"
+
+&kscan {
+    rows = <1>;
+    columns = <44>;
+    events = <
+        TAP(RH1) TAP(LM4) TAP(LM4)
+        DOWN(RH1, 300) TAP(LM4) UP(RH1, 300)
+    >;
+};

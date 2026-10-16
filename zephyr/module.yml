@@ -1,0 +1,7 @@
+# Makes this repo a ZMK keyboard module: the KLOR shield lives in
+# boards/shields/klor/. GitHub Actions (ZMK's build-user-config workflow) picks
+# it up automatically; local builds pass it via -DZMK_EXTRA_MODULES (Makefile).
+name: zmk-keyboard-klor
+build:
+  settings:
+    board_root: .

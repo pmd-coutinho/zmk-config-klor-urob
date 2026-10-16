@@ -1,0 +1,11 @@
+/* Tap NUM thumb = num-word: digits until a non-number key (space) ends it. */
+#include "../../config/klor.keymap"
+#include "../mock.h"
+
+&kscan {
+    rows = <1>;
+    columns = <44>;
+    events = <
+        TAP(RH0) TAP(LM2) TAP(LT3) TAP(LB1) TAP(LH1) TAP(LM2)
+    >;
+};

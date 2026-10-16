@@ -1,0 +1,20 @@
+/* HRMs: cross-hand chord = mod; same-hand roll = letters; fast typing = letters. */
+#include "../../config/klor.keymap"
+#include "../mock.h"
+
+&kscan {
+    rows = <1>;
+    columns = <44>;
+    events = <
+        /* F (LCTRL) held + J tapped -> Ctrl+J */
+        DOWN(LM1, 50) DOWN(RM1, 30) UP(RM1, 30) UP(LM1, 300)
+        /* same-hand roll F,D -> "fd" (positional: left HRM ignores left keys) */
+        DOWN(LM1, 30) DOWN(LM2, 30) UP(LM1, 30) UP(LM2, 300)
+        /* K (RSHFT) held + A tapped -> Shift+A */
+        DOWN(RM2, 50) DOWN(LM4, 30) UP(LM4, 30) UP(RM2, 300)
+        /* F held past tapping term, released alone -> nothing (hold, no key) */
+        DOWN(LM1, 400) UP(LM1, 300)
+        /* fast typing: "e" then "s" 20ms later -> S is a plain tap (prior-idle) */
+        DOWN(LT2, 20) DOWN(LM3, 20) UP(LT2, 20) UP(LM3, 300)
+    >;
+};

@@ -1,5 +1,5 @@
 /*
- * Leader-key sequences. Trigger the leader with the LM2+LM1 combo (see
+ * Leader-key sequences. Trigger the leader with the LM2+LM1 combo (D+F on QWERTY; see
  * combos.dtsi), then type a sequence below.
  *
  * Portuguese accents + currency symbols, via the zmk-unicode module. Holding

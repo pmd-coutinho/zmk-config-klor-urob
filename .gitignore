@@ -1,12 +1,8 @@
-# west workspace + fetched sources (cloned by `make init`)
-/.west/
-/zmk/
-/zephyr/
-/modules/
+# west workspace: fetched sources + build dirs (created by `make init`)
+/.zmk/
 
 # build artifacts
-/build/
-/firmware/*.uf2
+/firmware/**/*.uf2
 
 # keymap-drawer intermediate (keep config.yaml + the rendered .svg)
 /draw/klor.yaml

@@ -25,7 +25,7 @@
         /* top    pos 0-9  */ LT RT                                            \
         /* mid    pos 10-21*/ &kp LSHFT  LM  RM  &kp SQT                       \
         /* bottom pos 22-35*/ &kp LCTRL  LB  &kp C_MUTE  &kp C_PP  RB  &kp RET \
-        /* thumbs pos 36-43*/ &kp ESC  &mt LGUI TAB  LH  RH  &mo SYS  &kp BSPC \
+        /* thumbs pos 36-43*/ &kp ESC  &thumb_gui LGUI TAB  LH  RH  &mo SYS  &kp BSPC \
         /* encoders: left = volume, right = page scroll */                     \
         , &inc_dec_kp C_VOL_UP C_VOL_DN  &inc_dec_kp PG_UP PG_DN)
 
@@ -33,9 +33,16 @@
 #include <zmk-helpers/key-labels/klor.h>
 #include "base.keymap"
 
+/* Gui/Tab thumb. Not &mt: base.keymap tunes &mt for the NAV cluster
+ * (tap-preferred + hold-trigger-key-positions = <0>), which would resolve
+ * Gui+key chords as Tab unless the thumb is held past the tapping term. */
+ZMK_HOLD_TAP(thumb_gui, bindings = <&kp>, <&kp>; flavor = "balanced";
+             tapping-term-ms = <200>; quick-tap-ms = <QUICK_TAP_MS>;)
+
 /* Unicode input mode. Linux IBus (Ctrl+Shift+U) by default. Change to match
  * your OS: UC_MODE_MACOS | UC_MODE_LINUX | UC_MODE_LINUX_ALT |
- *          UC_MODE_WIN_COMPOSE | UC_MODE_WIN_ALT | UC_MODE_EMACS            */
+ *          UC_MODE_WIN_COMPOSE | UC_MODE_WIN_ALT | UC_MODE_EMACS
+ * (UC_MODE_LINUX_ALT is a fallback if some Linux apps choke on IBus.)      */
 &uc {
     default-mode = <UC_MODE_LINUX>;
 };

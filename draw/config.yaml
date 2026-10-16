@@ -1,12 +1,12 @@
 # keymap-drawer config. zmk_additional_includes lets its preprocessor resolve
 # the urob zmk-helpers macros (ZMK_LAYER / ZMK_BASE_LAYER / ZMK_COMBO) and the
 # KLOR key-position labels, so the macro-based keymap expands to a real keymap
-# node. Paths are relative to the repo root (populated by `make init`).
+# node. Paths are relative to the repo root (.zmk/ is populated by `make init`).
 parse_config:
   preprocess: true
   zmk_additional_includes:
-    - modules/zmk/helpers/include
-    - modules/zmk/unicode/include
+    - .zmk/modules/zmk/helpers/include
+    - .zmk/modules/zmk/unicode/include
   # Treat the encoder push + extra columns sensibly; map a few custom behaviors
   # to readable labels.
   zmk_keycode_map: {}
