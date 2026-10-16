@@ -32,7 +32,9 @@ layer and ZMK Studio, and it is covered by keymap simulation tests.
   Long-presses give line start/end, document start/end and delete-word.
 - **Smart word/line selection**, modelled on
   [getreuer's select_word](https://github.com/getreuer/qmk-modules/tree/main/select_word).
-  Tap to select, tap again to extend; any other key stops.
+  Tap once to select the word or line at the cursor, tap again to extend by one,
+  hold to keep extending. Any other key stops. Lines are selected whole,
+  including the line break.
 - **Smart layers** that switch themselves off: num-word for typing numbers, and
   smart-mouse for mouse keys.
 - **Magic shift thumb**: tap for sticky shift, double-tap for caps-word, hold
@@ -228,6 +230,7 @@ sends with `tests/<case>/expected.log`.
 | `homerow_mods` | Cross-hand chord = mod, same-hand roll and fast typing = letters |
 | `thumb_gui` | Quick Gui+key chords on the Gui/Tab thumb |
 | `nav_layer` | Arrows and backspace on NAV, space on tap |
+| `selection` | Word/line select: one per tap, extend, hold, reverse, reset |
 | `combos` | Esc, parens, brackets, vertical symbols |
 | `num_word` | Digits until a non-number key ends num-word |
 | `magic_shift` | Sticky shift and held shift |
@@ -263,8 +266,9 @@ Notes:
   `require-prior-idle-ms` in `MAKE_HRM` (`config/base.keymap`). See urob's
   [troubleshooting guide](https://github.com/urob/zmk-config#troubleshooting).
   When you fix a misfire, add a test case for it.
-- **macOS**: word/line selection uses Ctrl-based cursor motions. Swap
-  `Ctrl` → `Alt` in the `sw_*_init` macros and use `Gui` for line motions.
+- **macOS**: word/line selection uses Windows/Linux cursor keys. In the
+  `sw_*` macros swap `Ctrl` → `Alt`, and in the `sl_*` macros use `Gui+Left` /
+  `Gui+Right` instead of `Home` / `End` (`config/base.keymap`).
 - **Per-key RGB** is available on the KLOR but disabled. See the note at the
   bottom of `config/klor.conf`.
 

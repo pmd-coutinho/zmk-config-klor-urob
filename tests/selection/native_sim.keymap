@@ -1,0 +1,26 @@
+/* NAV word/line selection (getreuer select_word semantics): one tap selects
+ * exactly one word/line; further taps extend by one word/line. */
+#include "../../config/klor.keymap"
+#include "../mock.h"
+
+&kscan {
+    rows = <1>;
+    columns = <44>;
+    events = <
+        /* word forward: tap once, then tap again to extend */
+        DOWN(LH1, 250) TAP(RB3) UP(LH1, 400)
+        DOWN(LH1, 250) TAP(RB3) TAP(RB3) UP(LH1, 400)
+        /* word backward: tap once */
+        DOWN(LH1, 250) TAP(RB0) UP(LH1, 400)
+        /* line down: tap once, then extend */
+        DOWN(LH1, 250) TAP(RB2) TAP(RB2) UP(LH1, 400)
+        /* line up: tap once, then extend */
+        DOWN(LH1, 250) TAP(RB1) TAP(RB1) UP(LH1, 400)
+        /* hold word forward: the selection chord stays down while held */
+        DOWN(LH1, 250) DOWN(RB3, 600) UP(RB3, 300) UP(LH1, 400)
+        /* reversal: word forward, then word backward */
+        DOWN(LH1, 250) TAP(RB3) TAP(RB0) UP(LH1, 400)
+        /* any other key ends it: next tap starts a fresh selection */
+        DOWN(LH1, 250) TAP(RB3) TAP(RM1) TAP(RB3) UP(LH1, 400)
+    >;
+};
