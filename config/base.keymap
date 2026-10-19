@@ -3,6 +3,7 @@
 #include <behaviors/unicode.dtsi> // Requires zmk-unicode module.
 #include <zmk-helpers/helper.h> // Requires zmk-helpers module.
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/rgb.h>
 #ifdef CONFIG_WIRELESS
   #include <dt-bindings/zmk/bt.h>
   #include <dt-bindings/zmk/outputs.h>
@@ -280,9 +281,9 @@ ZMK_BASE_LAYER(Sys,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
                                _BT_SEL_KEYS_                            ,   &out OUT_USB  &out OUT_BLE  &studio_unlock ___          ___         ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    ___           ___           ___           ___           &bootloader ,   &bootloader   ___           ___           ___           ___         ,
+    &rgb_ug RGB_TOG &rgb_ug RGB_EFF &rgb_ug RGB_BRD &rgb_ug RGB_BRI &bootloader , &bootloader ___         ___           ___           ___         ,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    ___           ___           ___           ___           &sys_reset  ,   &sys_reset    ___           ___           ___           ___         ,
+    &rgb_ug RGB_HUD &rgb_ug RGB_HUI &rgb_ug RGB_SPD &rgb_ug RGB_SPI &sys_reset , &sys_reset  ___         ___           ___           ___         ,
 //╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯
                                               ___           ___         ,   ___           ___
 //                                          ╰─────────────┴─────────────╯ ╰─────────────┴─────────────╯

@@ -2,7 +2,8 @@
 
 A [urob](https://github.com/urob/zmk-config)-style ZMK config for the
 [**KLOR**](https://github.com/GEIGEIGEIST/KLOR) polydactyl: a 44-key split with
-two rotary encoders and an OLED, running on nice!nano v2 controllers. It uses a
+two rotary encoders, OLEDs and per-key RGB, running on nice!nano v2 controllers
+(built from the [Rev 1.4 PCB](https://github.com/Lefuneste83/KLOR)). It uses a
 QWERTY base layer with urob's "timeless" homerow mods, a vim-style navigation
 layer and ZMK Studio, and it is covered by keymap simulation tests.
 
@@ -41,7 +42,8 @@ layer and ZMK Studio, and it is covered by keymap simulation tests.
   for shift. Unlike urob's, it has no repeat key.
 - **Leader key** for Portuguese accents and currency symbols (via
   `zmk-unicode`).
-- **Two encoders**: volume (left) and Page Up/Down (right).
+- **Two encoders**: volume (left) and Page Up/Down (right), one step per click.
+- **Per-key RGB** (21 LEDs per half), controlled from the SYS layer.
 - **ZMK Studio** on the left half, for live keymap edits without reflashing.
 
 ## Keymap
@@ -54,7 +56,7 @@ layer and ZMK Studio, and it is covered by keymap simulation tests.
 | `Nav`   | hold Space            | Left: sticky mods, Alt-Tab swapper, Shift-Tab, Alt-F4. Right: `Bspc PgDn PgUp Del` / `← ↓ ↑ →` / word & line select. `Cancel` on the shift thumb. |
 | `Fn`    | hold Enter            | F1–F12 on the left (with homerow mods), media and desktop keys on the right |
 | `Num`   | Num thumb (see below) | Numpad on the left hand, with homerow mods |
-| `Sys`   | Fn + Num, or SYS thumb | Bluetooth profiles 1–4 and clear, USB/BLE output, Studio unlock, bootloader, reset |
+| `Sys`   | Fn + Num, or SYS thumb Bluetooth profiles 1–4 and clear, USB/BLE output, Studio unlock, bootloader, reset. Left hand: RGB on/off, effect, brightness −/+ (`A S D F`), hue −/+ and speed −/+ (`Z X C V`) |
 | `Mouse` | `E` + `R` combo       | Cursor, scroll and clicks on the right hand. Turns off on any other key. |
 
 NAV long-presses: `←`/`→` = line start/end, `↑`/`↓` = document start/end,
@@ -258,7 +260,7 @@ Num thumb, …).
 | Mouse speed / acceleration | `config/mouse.dtsi` |
 | Firmware options (sleep, display, BLE) | `config/klor.conf` |
 | Dependency versions | `config/west.yml` (tracks [urob's pins](https://github.com/urob/zmk-config/blob/main/config/west.yml)) |
-| Hardware (pins, matrix, encoders, OLED) | `boards/shields/klor/` |
+| Hardware (pins, matrix, encoders, OLED, RGB) | `boards/shields/klor/` |
 
 Notes:
 
@@ -269,14 +271,16 @@ Notes:
 - **macOS**: word/line selection uses Windows/Linux cursor keys. In the
   `sw_*` macros swap `Ctrl` → `Alt`, and in the `sl_*` macros use `Gui+Left` /
   `Gui+Right` instead of `Home` / `End` (`config/base.keymap`).
-- **Per-key RGB** is available on the KLOR but disabled. See the note at the
-  bottom of `config/klor.conf`.
+- **Per-key RGB**: start colour/brightness and the brightness cap (50%) are in
+  `config/klor.conf`. Toggling the LEDs off deliberately does *not* cut the
+  switched VCC rail, which also powers the OLEDs and the right half. Raise the
+  brightness cap with care: the left controller powers all 42 LEDs.
 
 ## Repository layout
 
 ```text
 config/              user config: keymaps, combos, leader, mouse, west.yml
-boards/shields/klor/ KLOR shield (kscan, matrix, encoders, OLED, physical layout)
+boards/shields/klor/ KLOR shield (kscan, matrix, encoders, OLED, RGB, physical layout)
 zephyr/module.yml    makes this repo a ZMK keyboard module
 tests/               keymap simulation tests (make test)
 draw/                keymap-drawer config + rendered klor.svg
